@@ -1,0 +1,646 @@
+@prefix : <http://www.cs.ccsu.edu/~neli/university.owl#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <http://www.cs.ccsu.edu/~neli/university.owl> .
+
+<http://www.cs.ccsu.edu/~neli/university.owl> rdf:type owl:Ontology .
+
+
+#################################################################
+#
+#    Object Properties
+#
+#################################################################
+
+
+###  http://www.cs.ccsu.edu/~neli/university.owl#helpsWith
+
+:helpsWith rdf:type owl:ObjectProperty ;
+           
+           rdfs:range :Course ;
+           
+           rdfs:domain :LabAssistant .
+
+
+
+###  http://www.cs.ccsu.edu/~neli/university.owl#isOfferedBy
+
+:isOfferedBy rdf:type owl:ObjectProperty ;
+             
+             rdfs:domain :Course ;
+             
+             rdfs:range :Department ;
+             
+             owl:inverseOf :offers .
+
+
+
+###  http://www.cs.ccsu.edu/~neli/university.owl#isUsedBy
+
+:isUsedBy rdf:type owl:ObjectProperty ;
+          
+          rdfs:domain :Book ;
+          
+          rdfs:range :Course ;
+          
+          owl:inverseOf :uses .
+
+
+
+###  http://www.cs.ccsu.edu/~neli/university.owl#offers
+
+:offers rdf:type owl:ObjectProperty ;
+        
+        rdfs:range :Course ;
+        
+        rdfs:domain :Department .
+
+
+
+###  http://www.cs.ccsu.edu/~neli/university.owl#studies
+
+:studies rdf:type owl:ObjectProperty ;
+         
+         rdfs:range :Course ;
+         
+         rdfs:domain :Student .
+
+
+
+###  http://www.cs.ccsu.edu/~neli/university.owl#teaches
+
+:teaches rdf:type owl:ObjectProperty ;
+         
+         rdfs:range :Course ;
+         
+         rdfs:domain :Professor .
+
+
+
+###  http://www.cs.ccsu.edu/~neli/university.owl#uses
+
+:uses rdf:type owl:ObjectProperty ;
+      
+      rdfs:range :Book ;
+      
+      rdfs:domain :Course .
+
+
+
+###  http://xmlns.com/foaf/0.1/knows
+
+foaf:knows rdf:type owl:ObjectProperty ;
+           
+           rdfs:domain :Person ;
+           
+           rdfs:range :Person ;
+           
+           rdfs:subPropertyOf owl:topObjectProperty .
+
+
+
+
+
+#################################################################
+#
+#    Data properties
+#
+#################################################################
+
+
+###  http://www.cs.ccsu.edu/~neli/university.owl#e-mail
+
+:e-mail rdf:type owl:DatatypeProperty ;
+        
+        rdfs:domain :Person ;
+        
+        rdfs:range xsd:string .
+
+
+
+###  http://www.cs.ccsu.edu/~neli/university.owl#firstName
+
+:firstName rdf:type owl:DatatypeProperty ;
+           
+           rdfs:domain :Person ;
+           
+           rdfs:range xsd:string .
+
+
+
+###  http://www.cs.ccsu.edu/~neli/university.owl#lastName
+
+:lastName rdf:type owl:DatatypeProperty ;
+          
+          rdfs:domain :Person ;
+          
+          rdfs:range xsd:string .
+
+
+
+###  http://www.cs.ccsu.edu/~neli/university.owl#publisher
+
+:publisher rdf:type owl:DatatypeProperty ;
+           
+           rdfs:domain :Book ;
+           
+           rdfs:range xsd:string .
+
+
+
+###  http://www.cs.ccsu.edu/~neli/university.owl#staffID
+
+:staffID rdf:type owl:DatatypeProperty ;
+         
+         rdfs:range xsd:integer .
+
+
+
+###  http://www.cs.ccsu.edu/~neli/university.owl#studentID
+
+:studentID rdf:type owl:DatatypeProperty ;
+           
+           rdfs:domain :Student ;
+           
+           rdfs:range xsd:integer .
+
+
+
+###  http://www.cs.ccsu.edu/~neli/university.owl#title
+
+:title rdf:type owl:DatatypeProperty ;
+       
+       rdfs:domain :Book ;
+       
+       rdfs:range xsd:string .
+
+
+
+
+
+#################################################################
+#
+#    Classes
+#
+#################################################################
+
+
+###  http://www.cs.ccsu.edu/~neli/university.owl#Book
+
+:Book rdf:type owl:Class .
+
+
+
+###  http://www.cs.ccsu.edu/~neli/university.owl#Course
+
+:Course rdf:type owl:Class ;
+        
+        owl:disjointWith :Student .
+
+
+
+###  http://www.cs.ccsu.edu/~neli/university.owl#Department
+
+:Department rdf:type owl:Class .
+
+
+
+###  http://www.cs.ccsu.edu/~neli/university.owl#LabAssistant
+
+:LabAssistant rdf:type owl:Class ;
+              
+              rdfs:subClassOf :Staff ;
+              
+              owl:disjointWith :Professor .
+
+
+
+###  http://www.cs.ccsu.edu/~neli/university.owl#LabManual
+
+:LabManual rdf:type owl:Class ;
+           
+           rdfs:subClassOf :Book ;
+           
+           owl:disjointWith :Textbook .
+
+
+
+###  http://www.cs.ccsu.edu/~neli/university.owl#Person
+
+:Person rdf:type owl:Class .
+
+
+
+###  http://www.cs.ccsu.edu/~neli/university.owl#Professor
+
+:Professor rdf:type owl:Class ;
+           
+           rdfs:subClassOf :Staff .
+
+
+
+###  http://www.cs.ccsu.edu/~neli/university.owl#Staff
+
+:Staff rdf:type owl:Class ;
+       
+       rdfs:subClassOf :Person ;
+       
+       owl:disjointWith :Student .
+
+
+
+###  http://www.cs.ccsu.edu/~neli/university.owl#Student
+
+:Student rdf:type owl:Class ;
+         
+         rdfs:subClassOf :Person .
+
+
+
+###  http://www.cs.ccsu.edu/~neli/university.owl#Textbook
+
+:Textbook rdf:type owl:Class ;
+          
+          rdfs:subClassOf :Book .
+
+
+
+
+
+#################################################################
+#
+#    Individuals
+#
+#################################################################
+
+
+###  http://www.cs.ccsu.edu/~neli/university.owl#Anna
+
+:Anna rdf:type :Student ,
+               owl:NamedIndividual ;
+      
+      :studies :Math101 ;
+      
+      :uses :MathsManual ,
+            :MathsTextbook .
+
+
+
+###  http://www.cs.ccsu.edu/~neli/university.owl#Biology101
+
+:Biology101 rdf:type :Course ,
+                     owl:NamedIndividual .
+
+
+
+###  http://www.cs.ccsu.edu/~neli/university.owl#BiologyDepartment
+
+:BiologyDepartment rdf:type :Department ,
+                            owl:NamedIndividual .
+
+
+
+###  http://www.cs.ccsu.edu/~neli/university.owl#BiologyManual
+
+:BiologyManual rdf:type :LabManual ,
+                        owl:NamedIndividual .
+
+
+
+###  http://www.cs.ccsu.edu/~neli/university.owl#BiologyTextbook
+
+:BiologyTextbook rdf:type :Textbook ,
+                          owl:NamedIndividual .
+
+
+
+###  http://www.cs.ccsu.edu/~neli/university.owl#Bob
+
+:Bob rdf:type :Student ,
+              owl:NamedIndividual ;
+     
+     :studies :CS101 ;
+     
+     :uses :CSManual ,
+           :CSTextbook ;
+     
+     :studies :Math101 ;
+     
+     :uses :MathsManual ,
+           :MathsTextbook .
+
+
+
+###  http://www.cs.ccsu.edu/~neli/university.owl#CS101
+
+:CS101 rdf:type :Course ,
+                owl:NamedIndividual .
+
+
+
+###  http://www.cs.ccsu.edu/~neli/university.owl#CSDepartment
+
+:CSDepartment rdf:type :Department ,
+                       owl:NamedIndividual ;
+              
+              :offers :CS101 .
+
+
+
+###  http://www.cs.ccsu.edu/~neli/university.owl#CSManual
+
+:CSManual rdf:type :LabManual ,
+                   owl:NamedIndividual .
+
+
+
+###  http://www.cs.ccsu.edu/~neli/university.owl#CSTextbook
+
+:CSTextbook rdf:type :Textbook ,
+                     owl:NamedIndividual .
+
+
+
+###  http://www.cs.ccsu.edu/~neli/university.owl#Chemistry101
+
+:Chemistry101 rdf:type :Course ,
+                       owl:NamedIndividual .
+
+
+
+###  http://www.cs.ccsu.edu/~neli/university.owl#ChemistryDepartment
+
+:ChemistryDepartment rdf:type :Department ,
+                              owl:NamedIndividual .
+
+
+
+###  http://www.cs.ccsu.edu/~neli/university.owl#ChemistryManual
+
+:ChemistryManual rdf:type :LabManual ,
+                          owl:NamedIndividual .
+
+
+
+###  http://www.cs.ccsu.edu/~neli/university.owl#ChemistryTextbook
+
+:ChemistryTextbook rdf:type :Textbook ,
+                            owl:NamedIndividual .
+
+
+
+###  http://www.cs.ccsu.edu/~neli/university.owl#Clark
+
+:Clark rdf:type :Professor ,
+                owl:NamedIndividual ;
+       
+       :teaches :Chemistry101 ;
+       
+       :uses :Chemistry101 ,
+             :ChemistryManual .
+
+
+
+###  http://www.cs.ccsu.edu/~neli/university.owl#Electronics101
+
+:Electronics101 rdf:type :Course ,
+                         owl:NamedIndividual .
+
+
+
+###  http://www.cs.ccsu.edu/~neli/university.owl#ElectronicsDepartment
+
+:ElectronicsDepartment rdf:type :Department ,
+                                owl:NamedIndividual .
+
+
+
+###  http://www.cs.ccsu.edu/~neli/university.owl#ElectronicsManual
+
+:ElectronicsManual rdf:type :LabManual ,
+                            owl:NamedIndividual .
+
+
+
+###  http://www.cs.ccsu.edu/~neli/university.owl#ElectronicsTextbook
+
+:ElectronicsTextbook rdf:type :Textbook ,
+                              owl:NamedIndividual .
+
+
+
+###  http://www.cs.ccsu.edu/~neli/university.owl#Gary
+
+:Gary rdf:type :Student ,
+               owl:NamedIndividual ;
+      
+      :studies :Chemistry101 ;
+      
+      :uses :ChemistryManual ,
+            :ChemistryTextbook .
+
+
+
+###  http://www.cs.ccsu.edu/~neli/university.owl#Harold
+
+:Harold rdf:type :Professor ,
+                 owl:NamedIndividual ;
+        
+        :teaches :Biology101 ;
+        
+        :uses :BiologyManual ,
+              :BiologyTextbook .
+
+
+
+###  http://www.cs.ccsu.edu/~neli/university.owl#Harry
+
+:Harry rdf:type :Student ,
+                owl:NamedIndividual ;
+       
+       :studies :Biology101 ;
+       
+       :uses :BiologyManual ,
+             :BiologyTextbook .
+
+
+
+###  http://www.cs.ccsu.edu/~neli/university.owl#Jackson
+
+:Jackson rdf:type :Professor ,
+                  owl:NamedIndividual ;
+         
+         :teaches :Electronics101 ;
+         
+         :uses :ElectronicsManual ,
+               :ElectronicsTextbook .
+
+
+
+###  http://www.cs.ccsu.edu/~neli/university.owl#Jerry
+
+:Jerry rdf:type :Student ,
+                owl:NamedIndividual ;
+       
+       :studies :Electronics101 ;
+       
+       :uses :ElectronicsManual ,
+             :ElectronicsTextbook .
+
+
+
+###  http://www.cs.ccsu.edu/~neli/university.owl#Jim
+
+:Jim rdf:type :Student ,
+              owl:NamedIndividual ;
+     
+     :studies :CS101 ;
+     
+     :uses :CSManual ,
+           :CSTextbook .
+
+
+
+###  http://www.cs.ccsu.edu/~neli/university.owl#Jones
+
+:Jones rdf:type :Professor ,
+                owl:NamedIndividual ;
+       
+       :teaches :Math101 .
+
+
+
+###  http://www.cs.ccsu.edu/~neli/university.owl#Math101
+
+:Math101 rdf:type :Course ,
+                  owl:NamedIndividual .
+
+
+
+###  http://www.cs.ccsu.edu/~neli/university.owl#MathDepartment
+
+:MathDepartment rdf:type :Department ,
+                         owl:NamedIndividual ;
+                
+                :offers :Math101 .
+
+
+
+###  http://www.cs.ccsu.edu/~neli/university.owl#MathsManual
+
+:MathsManual rdf:type :LabManual ,
+                      owl:NamedIndividual .
+
+
+
+###  http://www.cs.ccsu.edu/~neli/university.owl#MathsTextbook
+
+:MathsTextbook rdf:type :Textbook ,
+                        owl:NamedIndividual .
+
+
+
+###  http://www.cs.ccsu.edu/~neli/university.owl#Mike
+
+:Mike rdf:type :Student ,
+               owl:NamedIndividual ;
+      
+      :studies :Math101 ;
+      
+      :uses :MathsManual ,
+            :MathsTextbook .
+
+
+
+###  http://www.cs.ccsu.edu/~neli/university.owl#Smith
+
+:Smith rdf:type :Professor ,
+                owl:NamedIndividual ;
+       
+       :teaches :CS101 ;
+       
+       :uses :CSManual ,
+             :CSTextbook .
+
+
+
+###  http://www.cs.ccsu.edu/~neli/university.owl#Srini
+
+:Srini rdf:type :Student ,
+                owl:NamedIndividual ;
+       
+       foaf:knows :Anna ,
+                  :Bob ;
+       
+       :studies :CS101 ;
+       
+       :uses :CSManual ,
+             :CSTextbook ;
+       
+       foaf:knows :Gary ,
+                  :Harry .
+
+
+
+###  http://www.cs.ccsu.edu/~neli/university.owl#Terry
+
+:Terry rdf:type :Student ,
+                owl:NamedIndividual ;
+       
+       :studies :Biology101 ;
+       
+       :uses :BiologyManual ,
+             :BiologyTextbook .
+
+
+
+###  http://www.cs.ccsu.edu/~neli/university.owl#Tim
+
+:Tim rdf:type :Student ,
+              owl:NamedIndividual ;
+     
+     :studies :Chemistry101 ;
+     
+     :uses :ChemistryManual ,
+           :ChemistryTextbook .
+
+
+
+###  http://www.cs.ccsu.edu/~neli/university.owl#Tom
+
+:Tom rdf:type :Student ,
+              owl:NamedIndividual ;
+     
+     :studies :Electronics101 ;
+     
+     :uses :ElectronicsManual ,
+           :ElectronicsTextbook .
+
+
+
+
+
+#################################################################
+#
+#    General axioms
+#
+#################################################################
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :Book
+                :Course
+                :Department
+                :Person
+              )
+] .
+
+
+
+
+###  Generated by the OWL API (version 3.4.2) http://owlapi.sourceforge.net
+
